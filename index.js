@@ -18,9 +18,12 @@ editButton.addEventListener("click", formOpen);
 //close popup
 function formClose() {
     popup.classList.remove("popup_opened");
+    formName.value = '';
+    formDescription.value = '';
 }
 
 popupClose.addEventListener("click", formClose);
+
 
 
 //save button
