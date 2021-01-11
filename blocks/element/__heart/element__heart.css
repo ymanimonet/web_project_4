@@ -1,0 +1,10 @@
+.element__heart {
+    width: 20.76px;
+    height: 18.13px;
+    align-self: flex-end;
+}
+
+.element__heart:hover {
+    opacity: 0.5;
+    cursor: pointer;
+}

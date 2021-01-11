@@ -1,0 +1,98 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+  <meta charset="UTF-8">
+  <meta name="viewport" content="width=device-width, initial-scale=1.0">
+  <title>Around the U.S.</title>
+  <link rel="stylesheet" href="pages/index.css">
+</head>
+
+<body class="root">
+    <div class="root__container">
+      <header class="header">
+          <img class="header__logo" src="images/logo.svg" alt="Around the US">
+          <div class="header__line"></div>
+      </header>
+      <main class="content">
+          <section class="profile">
+              <img class="profile__pic" src="images/profile-pic.jpg" alt="image of a man in a red hat">
+              <div class="profile__info">
+                  <h1 class="profile__title">Jacques Cousteau</h1>
+                  <p class="profile__subtitle">Explorer</p>
+                  <div class="profile__edit">
+                    <img class="profile__edit-image" src="images/edit.svg" alt="black and white vector drawing of a pencil">
+                  </div>
+              </div>
+              <div class="profile__add-button">
+                  <img class="profile__add" src="images/add.svg" alt="plus sign">
+              </div>
+          </section>
+          <section class="elements">
+              <ul class="elements__list">
+                <li class="element"> <!--1-->
+                  <img class="element__photo" src="images/yosemite.jpg" alt="river with trees lining both sides">
+                  <div class="element__container">
+                    <h2 class="element__title">Yosemite Valley</h2>
+                    <img class="element__heart" src="images/heart.svg" alt="heart">
+                  </div>
+
+                </li>
+                <li class="element"> <!--2-->
+                  <img class="element__photo" src="images/lake-louise.png" alt="a lake with mountains in the background">
+                  <div class="element__container">
+                    <h2 class="element__title">Lake Louise</h2>
+                    <img class="element__heart" src="images/heart.svg" alt="heart">
+                  </div>
+                </li>
+                <li class="element"> <!--3-->
+                  <img class="element__photo" src="images/bald-mountains.png" alt="sunrise over a mountain range">
+                  <div class="element__container">
+                    <h2 class="element__title">Bald Mountains</h2>
+                    <img class="element__heart" src="images/heart.svg" alt="heart">
+                  </div>
+                </li>
+                <li class="element"> <!--4-->
+                  <img class="element__photo" src="images/latemar.png" alt="mountains under a starry night sky">
+                  <div class="element__container">
+                    <h2 class="element__title">Latemar</h2>
+                    <img class="element__heart" src="images/heart.svg" alt="heart">
+                  </div>
+                </li>
+                <li class="element"> <!--5-->
+                  <img class="element__photo" src="images/vanoise.png" alt="mountains and their reflection in a body of water">
+                  <div class="element__container">
+                    <h2 class="element__title">Vanoise National Park</h2>
+                    <img class="element__heart" src="images/heart.svg" alt="heart">
+                  </div>
+                </li>
+                <li class="element"> <!--6-->
+                  <img class="element__photo" src="images/lago-de-braies.png" alt="docked row boats on a large body of water with mountains in the background">
+                  <div class="element__container">
+                    <h2 class="element__title">Lago de Braies</h2>
+                    <img class="element__heart" src="images/heart.svg" alt="heart">
+                  </div>
+                </li>
+              </ul>
+          </section>
+      </main>
+      <footer class="footer">
+        <p class="footer__text">© 2020 Around The U.S.</p>
+      </footer>
+    </div>
+    <section class="popup">
+        <form class="form popup__container">
+            <h2 class="form__title">Edit profile</h2>
+            <fieldset class="form__text">
+                <input class="form__item form__item_name" type="text" name="name" placeholder="Name">
+                <input class="form__item form__item_description" type="text" name="description" placeholder="About me">
+            </fieldset>
+            <fieldset class="form__handler">
+                <input class="form__button" type="submit" value="Save">
+            </fieldset>
+        </form>
+        <img class="popup__close" src="images/close.svg" alt="the letter X">
+        <div class="popup__overlay"></div>
+    </section>
+    <script src="index.js"></script>
+</body>
+</html>
