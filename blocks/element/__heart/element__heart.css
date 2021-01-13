@@ -1,7 +1,9 @@
 .element__heart {
-    width: 20.76px;
-    height: 18.13px;
+    width: 21px;
+    height: 18px;
     align-self: flex-end;
+    border: none;
+    background: transparent url("../../../images/heart.svg");
 }
 
 .element__heart:hover {

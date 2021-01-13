@@ -1,9 +1,9 @@
 .form__item {
     width: 358px;
-    margin-bottom: 29.74px;
-    padding-bottom: 13.26px;
+    margin-bottom: 30px;
+    padding-bottom: 13px;
     border: none;
-    border-bottom: 1px solid #000000;
+    border-bottom: 1px solid rgba(0, 0, 0, 0.2);
     color: #000000;
     font-weight: 400;
     font-size: 14px;

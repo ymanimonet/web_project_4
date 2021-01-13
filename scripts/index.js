@@ -4,13 +4,15 @@ let profileName = profile.querySelector(".profile__title");
 let profileDescription = profile.querySelector(".profile__subtitle");
 let popup = document.querySelector(".popup");
 let form = popup.querySelector(".form");
-let formName = form.querySelector(".form__item_name");
-let formDescription = form.querySelector(".form__item_description");
+let formName = form.querySelector(".form__item_field_name");
+let formDescription = form.querySelector(".form__item_field_description");
 let popupClose = popup.querySelector(".popup__close");
 
 //open popup
 function formOpen() {
     popup.classList.add("popup_opened");
+    formName.value = profileName.textContent;
+    formDescription.value = profileDescription.textContent;
 }
 
 editButton.addEventListener("click", formOpen);
