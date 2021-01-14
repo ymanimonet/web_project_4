@@ -4,15 +4,9 @@
 @import url(./__container/element__container.css);
 
 .element {
-    max-width: 282px;
+    max-width: 100%;
+    margin: 0 auto;
     background-color: #FFFFFF;
     border-radius: 10px;
     overflow: hidden;
-
-}
-
-@media screen and (max-width: 425px) {
-    .element {
-        margin: 0 auto;
-    }
 }

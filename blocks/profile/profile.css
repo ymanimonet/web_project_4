@@ -1,5 +1,4 @@
 @import url(./__add-button/profile__add-button.css);
-@import url(./__edit-image/profile__edit-image.css);
 @import url(./__edit/profile__edit.css);
 @import url(./__info/profile__info.css);
 @import url(./__pic/profile__pic.css);
@@ -14,7 +13,7 @@
     align-items: center;
 }
 
-@media screen and (max-width: 425px) {
+@media screen and (max-width: 525px) {
     .profile {
         width: 282px;
         margin: 0 auto 36px;

@@ -6,7 +6,7 @@ let popup = document.querySelector(".popup");
 let form = popup.querySelector(".form");
 let formName = form.querySelector(".form__item_field_name");
 let formDescription = form.querySelector(".form__item_field_description");
-let popupClose = popup.querySelector(".popup__close");
+let popupClose = popup.querySelector(".form__close");
 
 //open popup
 function formOpen() {
