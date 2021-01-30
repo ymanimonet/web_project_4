@@ -78,6 +78,7 @@ function handleFormCreate (evt) {
     evt.preventDefault();
     cardTitle.textContent = `${formTitle.value}`;
     cardImage.src = `${formImageUrl.value}`;
+    cardImage.alt = `${formTitle.value}`;
     list.prepend(newElement);
     addPopup.classList.remove("popup_opened");
 
@@ -95,6 +96,7 @@ function handleFormCreate (evt) {
 
         popupImage.src = `${formImageUrl.value}`;
         popupImageTitle.textContent = `${formTitle.value}`;
+        popupImage.alt = `${formTitle.value}`;
 
         imageWindow.classList.add("popup_opened");
         imageWindow.classList.remove("popup__container");
@@ -150,6 +152,7 @@ const initialCards = [
       
       cardTitle.textContent = data.name;
       cardImage.src = data.link;
+      cardImage.alt = data.name;
 
       cardLikeButton.addEventListener("click", () => {
           cardLikeButton.classList.toggle("element__heart_active");
@@ -166,6 +169,7 @@ const initialCards = [
 
         popupImage.src = data.link;
         popupImageTitle.textContent = data.name;
+        popupImage.alt = data.name;
 
         imageWindow.classList.add("popup_opened");
     })
