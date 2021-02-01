@@ -16,12 +16,11 @@ const createButton = addForm.querySelector(".form__button");
 const addPopupClose = addPopup.querySelector(".popup__close");
 const element = document.querySelector(".element");
 const cardTemplate = document.querySelector(".element-template").content.querySelector(".element");
-//const newElement = cardTemplate.cloneNode(true);
-//const cardImage = newElement.querySelector(".element__photo");
-//const cardTitle = newElement.querySelector(".element__title");
 const list = document.querySelector(".elements__list");
 const imageWindow = document.querySelector(".popup_type_image");
 const closeImageWindow = imageWindow.querySelector(".popup__close");
+const popupImage = imageWindow.querySelector(".popup__image");
+const popupImageTitle = imageWindow.querySelector(".popup__image-title");
 
 //open any popup
 function openPopup(popup) {
@@ -74,39 +73,6 @@ function addClose() {
 
 addPopupClose.addEventListener("click", addClose);
 
-/*
-//creates new card via submit
-function handleFormCreate (evt) {
-
-
-    evt.preventDefault();
-    cardTitle.textContent = `${formTitle.value}`;
-    cardImage.src = `${formImageUrl.value}`;
-    cardImage.alt = `${formTitle.value}`;
-    closePopup(addPopup);
-
-    cardImage.addEventListener("click", () => {
-        const popupImage = imageWindow.querySelector(".popup__image");
-        const popupImageTitle = imageWindow.querySelector(".popup__image-title");
-
-        popupImage.src = `${formImageUrl.value}`;
-        popupImageTitle.textContent = `${formTitle.value}`;
-        popupImage.alt = `${formTitle.value}`;
-        openPopup(imageWindow);
-    })
-
-    createCard();
-
-    list.prepend(newElement);
-
-}
-createButton.addEventListener("click", handleFormCreate);
-*/
-
-
-
-
-
 //creates initial cards
 const initialCards = [
     {
@@ -135,42 +101,6 @@ const initialCards = [
     }
   ];
 
-/*
-
-  initialCards.forEach(data => {
-    const cardElement = cardTemplate.cloneNode(true);
-
-    const cardImage = cardElement.querySelector(".element__photo");
-    const cardTitle = cardElement.querySelector(".element__title");
-      
-    cardTitle.textContent = data.name;
-    cardImage.src = data.link;
-    cardImage.alt = data.name;
-
-    //opens the image
-    cardImage.addEventListener("click", () => {
-      const popupImage = imageWindow.querySelector(".popup__image");
-      const popupImageTitle = imageWindow.querySelector(".popup__image-title");
-
-      popupImage.src = data.link;
-      popupImageTitle.textContent = data.name;
-      popupImage.alt = data.name;
-
-      imageWindow.classList.add("popup_opened");
-    })
-
-    //closes the image
-    closeImageWindow.addEventListener("click", () => {
-      imageWindow.classList.remove("popup_opened");
-    })
-
-    createCard();
-
-    list.prepend(cardElement);
-  })
-*/
-
-
 //creates card
 function createCard(name, link) {
   const cardElement = cardTemplate.cloneNode(true);
@@ -196,9 +126,6 @@ function createCard(name, link) {
 
   //opens the image
   cardImage.addEventListener("click", () => {
-    const popupImage = imageWindow.querySelector(".popup__image");
-    const popupImageTitle = imageWindow.querySelector(".popup__image-title");
-  
     popupImage.src = link;
     popupImageTitle.textContent = name;
     popupImage.alt = name;
@@ -219,8 +146,6 @@ closeImageWindow.addEventListener("click", () => {
 initialCards.forEach(data => {
   const cardElement = createCard(data.name, data.link);
   list.prepend(cardElement);
-
-  return createCard;
 })
 
 
