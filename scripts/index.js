@@ -16,7 +16,6 @@ const createButton = addForm.querySelector(".form__button");
 const addPopupClose = addPopup.querySelector(".popup__close");
 const element = document.querySelector(".element");
 const cardTemplate = document.querySelector(".element-template").content.querySelector(".element");
-const cardElement = cardTemplate.cloneNode(true);
 //const newElement = cardTemplate.cloneNode(true);
 //const cardImage = newElement.querySelector(".element__photo");
 //const cardTitle = newElement.querySelector(".element__title");
@@ -52,10 +51,10 @@ profileEditClose.addEventListener("click", closeProfilePopup);
 
 //save button
 function handleFormSubmit (evt) {
-    evt.preventDefault();
-    profileName.textContent = `${formName.value}`;
-    profileDescription.textContent = `${formDescription.value}`;
-    formClose();
+  evt.preventDefault();
+  profileName.textContent = `${formName.value}`;
+  profileDescription.textContent = `${formDescription.value}`;
+  formClose();
 }
 profileForm.addEventListener("submit", handleFormSubmit);
 
@@ -174,6 +173,8 @@ const initialCards = [
 
 //creates card
 function createCard(name, link) {
+  const cardElement = cardTemplate.cloneNode(true);
+
   const cardImage = cardElement.querySelector(".element__photo");
   const cardTitle = cardElement.querySelector(".element__title");
   const cardLikeButton = cardElement.querySelector(".element__heart");
@@ -204,27 +205,31 @@ function createCard(name, link) {
   
     openPopup(imageWindow);
   })
-  
-  //closes the image
-  closeImageWindow.addEventListener("click", () => {
-    closePopup(imageWindow);
-  })
+
+  return cardElement;
 
 }
 
+//closes the image
+closeImageWindow.addEventListener("click", () => {
+  closePopup(imageWindow);
+})
+
 //creates initial cards
 initialCards.forEach(data => {
-  createCard(data.name, data.link);
+  const cardElement = createCard(data.name, data.link);
   list.prepend(cardElement);
+
+  return createCard;
 })
 
 
 //creates card from form
 function newCard(evt) {
+  const cardElement = createCard(`${formTitle.value}`, `${formImageUrl.value}`);
   evt.preventDefault();
-  createCard(`${formTitle.value}`, `${formImageUrl.value}`);
   list.prepend(cardElement);
+  closePopup(addPopup);
 }
 
 createButton.addEventListener("click", newCard);
-
