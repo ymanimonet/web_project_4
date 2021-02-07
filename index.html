@@ -39,8 +39,13 @@
         <form class="form" name="edit-profile">
             <h2 class="form__title">Edit profile</h2>
             <fieldset class="form__text">
-                <input class="form__item form__item_field_name" type="text" name="name" placeholder="Name" required>
-                <input class="form__item form__item_field_description" type="text" name="description" placeholder="About me" required>
+
+                <input id="profile-name" class="form__item form__item_field_name" type="text" name="name" placeholder="Name" minlength="2" maxlength="40" required>
+                <span id="profile-name-error" class="form__error"></span>
+
+                <input id="profile-text" class="form__item form__item_field_description" type="text" name="description" placeholder="About me" minlength="2" maxlength="40" required>
+                <span id="profile-text-error" class="form__error"></span>
+
             </fieldset>
             <button class="form__button" type="submit" value="Save">Save</button>
         </form>
@@ -54,8 +59,13 @@
         <form class="form form_type_add" name="add-element">
             <h2 class="form__title">New Place</h2>
             <fieldset class="form__text">
-                <input class="form__item form__item_field_title" type="text" name="title" placeholder="Title" required>
-                <input class="form__item form__item_field_image-url" type="url" name="image-url" placeholder="Image Link" required>
+
+                <input id="card-title" class="form__item form__item_field_title" type="text" name="title" placeholder="Title" minlength="1" maxlength="30" required>
+                <span id="card-title-error"class="form__error"></span>
+
+                <input id="card-url" class="form__item form__item_field_image-url" type="url" name="image-url" placeholder="Image Link" required>
+                <span id="card-url-error" class="form__error"></span>
+
             </fieldset>
             <button class="form__button" type="submit" value="Create">Create</button>
         </form>
@@ -88,5 +98,6 @@
         </template>
 
     <script src="scripts/index.js"></script>
+    <script src="scripts/validation.js"></script>
   </body>
 </html>

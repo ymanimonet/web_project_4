@@ -53,7 +53,7 @@ function handleFormSubmit (evt) {
   evt.preventDefault();
   profileName.textContent = `${formName.value}`;
   profileDescription.textContent = `${formDescription.value}`;
-  formClose();
+  closePopup(profilePopup);
 }
 profileForm.addEventListener("submit", handleFormSubmit);
 
