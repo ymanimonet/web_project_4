@@ -3,3 +3,7 @@
     background-color: #FFFFFF;
     color: rgba(0, 0, 0, 0.2);
 }
+
+.form__button_disabled:hover {
+    cursor: default;
+}

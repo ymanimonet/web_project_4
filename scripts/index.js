@@ -32,6 +32,37 @@ function closePopup(popup) {
   popup.classList.remove("popup_opened");
 } 
 
+//close popup with esc key
+document.body.addEventListener("keydown", function (evt) {
+  if (evt.key === "Escape") {
+    closePopup(profilePopup);
+    closePopup(addPopup);
+    closePopup(imageWindow);
+  }
+});
+
+//close popup by clicking elsewhere
+profilePopup.addEventListener("click", function (evt) {
+  let clickElement = evt.target;
+  if (clickElement.classList.contains("popup")) {
+    closePopup(profilePopup);
+  }
+});
+
+imageWindow.addEventListener("click", function (evt) {
+  let clickElement = evt.target;
+  if (clickElement.classList.contains("popup")) {
+    closePopup(imageWindow);
+  }
+});
+
+addPopup.addEventListener("click", function (evt) {
+  let clickElement = evt.target;
+  if (clickElement.classList.contains("popup")) {
+    closePopup(addPopup);
+  }
+});
+
 //open profile edit form
 function openProfilePopup() {
     openPopup(profilePopup);
