@@ -25,21 +25,23 @@ const popupImageTitle = imageWindow.querySelector(".popup__image-title");
 //open any popup
 function openPopup(popup) {
   popup.classList.add("popup_opened");
+  document.addEventListener("keydown", closeByEscape);
 }
 
 //close any popup
 function closePopup(popup) {
   popup.classList.remove("popup_opened");
+  document.removeEventListener("keydown", closeByEscape);
 } 
 
 //close popup with esc key
-document.body.addEventListener("keydown", function (evt) {
+function closeByEscape(evt) {
   if (evt.key === "Escape") {
-    closePopup(profilePopup);
-    closePopup(addPopup);
-    closePopup(imageWindow);
+    const openedPopup = document.querySelector(".popup_opened");
+    closePopup(openedPopup);
   }
-});
+}
+
 
 //close popup by clicking elsewhere
 profilePopup.addEventListener("click", function (evt) {
