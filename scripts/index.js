@@ -189,7 +189,6 @@ function newCard(data) {
   console.log(data);
 }
 
-createButton.addEventListener("click", newCard);
 
 
 
