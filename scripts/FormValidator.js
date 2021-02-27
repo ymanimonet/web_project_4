@@ -7,7 +7,7 @@ class FormValidator {
         this._inputErrorClass= settings.inputErrorClass;
         this._errorClass= settings.errorClass;
 
-        this._form = form;
+        this._form = formElement;
     }
     
     //needs second argument validationMessage
@@ -54,8 +54,6 @@ class FormValidator {
         this._form.addEventListener('submit', (evt) => {
             evt.preventDefault();
         });
-
-        this._setEventListeners();
     }
 
 

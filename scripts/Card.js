@@ -1,3 +1,7 @@
+const imageWindow = document.querySelector(".popup_type_image");
+const popupImage = imageWindow.querySelector(".popup__image");
+const popupImageTitle = imageWindow.querySelector(".popup__image-title");
+
 //open any popup
 const openPopup = (popup) => {
     popup.classList.add("popup_opened");
@@ -17,9 +21,8 @@ class Card {
         this._data = data;
         this._name = data.name;
         this._link = data.link;
-        this._templateSelector = templateSelector
-        //templateSelector used to be cardTemplate fyi
-        openPopup(imageWindow);
+        this._templateSelector = templateSelector;
+        
 
     }
 
@@ -46,21 +49,18 @@ class Card {
         const cardImage = this._card.querySelector(".element__photo");
         
         //like button
-        cardLikeButton.addEventListener("click", this._likeButton);
-        cardDeleteButton.addEventListener("click", this._deleteButton);
-        cardImage.addEventListener("click", this._cardPopup);
+        cardLikeButton.addEventListener("click", () => this._likeButton());
+        cardDeleteButton.addEventListener("click", () => this._deleteButton());
+        cardImage.addEventListener("click", () => this._cardPopup());
     }
 
     _getCardTemplate() {
-        const cardTemplate = document.querySelector(this._templateSelector)
-          .content.querySelector(".element");
+        const cardTemplate = document.querySelector(".element-template").content.querySelector(".element");
         return cardTemplate;
     }
 
-    //createCard = generateCard
     createCard() {
-        //cardElement = this._card
-        this._card = this._getcardtemplate.cloneNode(true);
+        this._card = this._getCardTemplate().cloneNode(true);
       
         const cardImage = this._card.querySelector(".element__photo");
         const cardTitle = this._card.querySelector(".element__title");

@@ -14,13 +14,13 @@ const defaultConfig = {
 const list = document.querySelector(".elements__list");
 const imageWindow = document.querySelector(".popup_type_image");
 
-//forms
-const addForm = addPopup.querySelector(".form_type_add");
-const profileForm = profilePopup.querySelector(".form_type_edit");
-
 //content
 const addPopup = document.querySelector(".popup_type_add");
 const profilePopup = document.querySelector(".popup_type_edit");
+
+//forms
+const addForm = addPopup.querySelector(".form_type_add");
+const profileForm = profilePopup.querySelector(".form_type_edit");
 
 //profile
 const profile = document.querySelector(".profile");
@@ -44,9 +44,7 @@ const formTitle = addForm.querySelector(".form__item_field_title");
 const formImageUrl = addForm.querySelector(".form__item_field_image-url");
 
 //to delete
-const popupImage = imageWindow.querySelector(".popup__image");
-const popupImageTitle = imageWindow.querySelector(".popup__image-title");
-const element = document.querySelector(".element");
+// const element = document.querySelector(".element");
 
 //validation
 const profileFormValidator = new FormValidator(defaultConfig, profileForm);
@@ -82,6 +80,12 @@ const initialCards = [
   }
 ];
 
+//open any popup
+const openPopup = (popup) => {
+  popup.classList.add("popup_opened");
+  document.addEventListener("keydown", closeByEscape);
+}
+
 //close any popup
 function closePopup(popup) {
   popup.classList.remove("popup_opened");
@@ -95,6 +99,14 @@ profilePopup.addEventListener("click", function (evt) {
     closePopup(profilePopup);
   }
 });
+
+//close popup with esc key
+const closeByEscape = (evt) => {
+  if (evt.key === "Escape") {
+      const openedPopup = document.querySelector(".popup_opened");
+      closePopup(openedPopup);
+  }
+}
 
 imageWindow.addEventListener("click", function (evt) {
   let clickElement = evt.target;
@@ -159,21 +171,20 @@ closeImageWindow.addEventListener("click", () => {
 
 //creates initial cards
 initialCards.forEach(data => {
-  const cardElement = new Card(data, "element-template");
+  const cardElement = new Card(data, ".element-template");
   list.prepend(cardElement.createCard());
 })
 
 
 //creates card from form
-function newCard(evt) {
-  const cardElement = createCard(`${formTitle.value}`, `${formImageUrl.value}`);
-  evt.preventDefault();
+function newCard(data) {
+  const cardElement = new Card(data, ".element-template");
   list.prepend(cardElement);
   closePopup(addPopup);
 }
 
 createButton.addEventListener("click", newCard);
 
-//listeners
+
 
 
