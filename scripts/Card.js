@@ -22,7 +22,7 @@ class Card {
         this._name = data.name;
         this._link = data.link;
         this._templateSelector = templateSelector;
-        
+        //console.log(this);
 
     }
 
@@ -71,7 +71,7 @@ class Card {
 
         this._setEventListeners();
       
-        return this._card;      
+        return this._card;   
     }
 }
 

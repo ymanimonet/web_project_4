@@ -43,9 +43,6 @@ const formDescription = profileForm.querySelector(".form__item_field_description
 const formTitle = addForm.querySelector(".form__item_field_title");
 const formImageUrl = addForm.querySelector(".form__item_field_image-url");
 
-//to delete
-// const element = document.querySelector(".element");
-
 //validation
 const profileFormValidator = new FormValidator(defaultConfig, profileForm);
 const addFormValidator = new FormValidator(defaultConfig, addForm);
@@ -138,14 +135,14 @@ function closeProfilePopup() {
 
 profileEditClose.addEventListener("click", closeProfilePopup);
 
-//save button
-function handleFormSubmit (evt) {
+//profile save button
+function profileSubmit (evt) {
   evt.preventDefault();
   profileName.textContent = `${formName.value}`;
   profileDescription.textContent = `${formDescription.value}`;
   closePopup(profilePopup);
 }
-profileForm.addEventListener("submit", handleFormSubmit);
+profileForm.addEventListener("submit", profileSubmit);
 
 //open add form
 function addOpen() {
@@ -163,6 +160,14 @@ function addClose() {
 
 addPopupClose.addEventListener("click", addClose);
 
+//add form submit button
+function cardSubmit(evt) {
+  evt.preventDefault();
+  newCard({name: formTitle.value, link: formImageUrl.value});
+}
+
+addForm.addEventListener("submit", cardSubmit);
+
 //closes the image
 closeImageWindow.addEventListener("click", () => {
   closePopup(imageWindow);
@@ -179,8 +184,9 @@ initialCards.forEach(data => {
 //creates card from form
 function newCard(data) {
   const cardElement = new Card(data, ".element-template");
-  list.prepend(cardElement);
+  list.prepend(cardElement.createCard());
   closePopup(addPopup);
+  console.log(data);
 }
 
 createButton.addEventListener("click", newCard);
