@@ -1,3 +1,4 @@
+/*
 const showErrorMessage = function(input, form, {errorClass, inputErrorClass, ...rest}) {
     const error = document.querySelector(`#${input.id}-error`);
 
@@ -67,3 +68,5 @@ enableValidation({
     inputErrorClass: "form__input_type_error",
     errorClass: "form__error_visible"
 }); 
+
+*/
