@@ -91,7 +91,7 @@ function closePopup(popup) {
 
 //close popup by clicking elsewhere
 profilePopup.addEventListener("click", function (evt) {
-  let clickElement = evt.target;
+  const clickElement = evt.target;
   if (clickElement.classList.contains("popup")) {
     closePopup(profilePopup);
   }
@@ -106,14 +106,14 @@ const closeByEscape = (evt) => {
 }
 
 imageWindow.addEventListener("click", function (evt) {
-  let clickElement = evt.target;
+  const clickElement = evt.target;
   if (clickElement.classList.contains("popup")) {
     closePopup(imageWindow);
   }
 });
 
 addPopup.addEventListener("click", function (evt) {
-  let clickElement = evt.target;
+  const clickElement = evt.target;
   if (clickElement.classList.contains("popup")) {
     closePopup(addPopup);
   }
@@ -190,6 +190,6 @@ function newCard(data) {
 }
 
 
-
+//export default openPopup;
 
 

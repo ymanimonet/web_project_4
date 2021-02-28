@@ -1,3 +1,5 @@
+//import openPopup from "./index.js";
+
 const imageWindow = document.querySelector(".popup_type_image");
 const popupImage = imageWindow.querySelector(".popup__image");
 const popupImageTitle = imageWindow.querySelector(".popup__image-title");
@@ -6,14 +8,6 @@ const popupImageTitle = imageWindow.querySelector(".popup__image-title");
 const openPopup = (popup) => {
     popup.classList.add("popup_opened");
     document.addEventListener("keydown", closeByEscape);
-}
-
-//close popup with esc key
-const closeByEscape = (evt) => {
-    if (evt.key === "Escape") {
-        const openedPopup = document.querySelector(".popup_opened");
-        closePopup(openedPopup);
-    }
 }
 
 class Card {
