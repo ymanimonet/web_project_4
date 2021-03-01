@@ -2,19 +2,6 @@ const imageWindow = document.querySelector(".popup_type_image");
 const popupImage = imageWindow.querySelector(".popup__image");
 const popupImageTitle = imageWindow.querySelector(".popup__image-title");
 
-//open any popup
-const openPopup = (popup) => {
-    popup.classList.add("popup_opened");
-    document.addEventListener("keydown", closeByEscape);
-}
-
-//close popup with esc key
-const closeByEscape = (evt) => {
-    if (evt.key === "Escape") {
-        const openedPopup = document.querySelector(".popup_opened");
-        closePopup(openedPopup);
-    }
-}
 
 class Card {
     constructor(data, templateSelector) {
@@ -22,7 +9,6 @@ class Card {
         this._name = data.name;
         this._link = data.link;
         this._templateSelector = templateSelector;
-        //console.log(this);
 
     }
 
@@ -40,7 +26,7 @@ class Card {
         popupImageTitle.textContent = this._name;
         popupImage.alt = this._name;
               
-        openPopup(imageWindow);
+        imageWindow.classList.add("popup_opened");
     }
 
     _setEventListeners() {
