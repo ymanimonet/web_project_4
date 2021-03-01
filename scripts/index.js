@@ -146,9 +146,10 @@ profileForm.addEventListener("submit", profileSubmit);
 
 //open add form
 function addOpen() {
-    openPopup(addPopup);
-    formTitle.value = '';
-    formImageUrl.value = '';
+  openPopup(addPopup);
+  formTitle.value = '';
+  formImageUrl.value = '';
+  createButton.disabled = true;
 }
 
 addButton.addEventListener("click", addOpen);
@@ -173,18 +174,20 @@ closeImageWindow.addEventListener("click", () => {
   closePopup(imageWindow);
 })
 
+function generateCard (data) {
+  const cardElement = new Card(data, ".element-template");
+  list.prepend(cardElement.createCard());
+}
 
 //creates initial cards
 initialCards.forEach(data => {
-  const cardElement = new Card(data, ".element-template");
-  list.prepend(cardElement.createCard());
+  generateCard(data);
 })
 
 
 //creates card from form
 function newCard(data) {
-  const cardElement = new Card(data, ".element-template");
-  list.prepend(cardElement.createCard());
+  generateCard(data);
   closePopup(addPopup);
   console.log(data);
 }

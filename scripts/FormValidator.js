@@ -38,11 +38,11 @@ class FormValidator {
         const isValid = this.inputs.every((input) => input.validity.valid);
     
         if (isValid) {
-            button.classList.remove(this._inactiveButtonClass);
-            button.disabled = false;
+            this.button.classList.remove(this._inactiveButtonClass);
+            this.button.disabled = false;
         } else {
-            button.classList.add(this._inactiveButtonClass);
-            button.disabled = true;
+            this.button.classList.add(this._inactiveButtonClass);
+            this.button.disabled = true;
         }
     };
 

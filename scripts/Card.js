@@ -4,11 +4,6 @@ const imageWindow = document.querySelector(".popup_type_image");
 const popupImage = imageWindow.querySelector(".popup__image");
 const popupImageTitle = imageWindow.querySelector(".popup__image-title");
 
-//open any popup
-const openPopup = (popup) => {
-    popup.classList.add("popup_opened");
-    document.addEventListener("keydown", closeByEscape);
-}
 
 class Card {
     constructor(data, templateSelector) {
@@ -34,7 +29,7 @@ class Card {
         popupImageTitle.textContent = this._name;
         popupImage.alt = this._name;
               
-        openPopup(imageWindow);
+        imageWindow.classList.add("popup_opened");
     }
 
     _setEventListeners() {
