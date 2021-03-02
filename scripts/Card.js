@@ -1,15 +1,35 @@
+//import openPopup from "./index.js";
+
 const imageWindow = document.querySelector(".popup_type_image");
 const popupImage = imageWindow.querySelector(".popup__image");
 const popupImageTitle = imageWindow.querySelector(".popup__image-title");
 
+//open any popup
+export function openPopup(popup) {
+    popup.classList.add("popup_opened");
+    document.addEventListener("keydown", closeByEscape);
+}
+  
+//close any popup
+export function closePopup(popup) {
+    popup.classList.remove("popup_opened");
+    document.removeEventListener("keydown", closeByEscape);
+} 
 
-class Card {
-    constructor(data, templateSelector, handleCardClick) {
+//close popup with esc key
+function closeByEscape (evt) {
+    if (evt.key === "Escape") {
+        const openedPopup = document.querySelector(".popup_opened");
+        closePopup(openedPopup);
+    }
+}
+
+export class Card {
+    constructor(data, templateSelector) {
         this._data = data;
         this._name = data.name;
         this._link = data.link;
         this._templateSelector = templateSelector;
-        this._handleCardClick = handleCardClick;
 
     }
 
@@ -26,6 +46,8 @@ class Card {
         popupImage.src = this._link;
         popupImageTitle.textContent = this._name;
         popupImage.alt = this._name;
+
+        openPopup(imageWindow);
     }
 
     _setEventListeners() {
@@ -36,8 +58,8 @@ class Card {
         cardLikeButton.addEventListener("click", () => this._likeButton());
         cardDeleteButton.addEventListener("click", () => this._deleteButton());
         cardImage.addEventListener("click", () => this._cardPopup());
+        popupImage.addEventListener("click", () => openPopup());
 
-        cardImage.addEventListener('click', () => this._handleCardClick(this._name, this._link));
     }
 
     _getCardTemplate() {
@@ -60,5 +82,3 @@ class Card {
         return this._card;   
     }
 }
-
-export default Card;
