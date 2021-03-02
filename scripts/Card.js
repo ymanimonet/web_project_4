@@ -4,8 +4,28 @@ const imageWindow = document.querySelector(".popup_type_image");
 const popupImage = imageWindow.querySelector(".popup__image");
 const popupImageTitle = imageWindow.querySelector(".popup__image-title");
 
+//open any popup
+export function openPopup(popup) {
+    popup.classList.add("popup_opened");
+    document.addEventListener("keydown", closeByEscape);
+}
+  
+//close any popup
+export function closePopup(popup) {
+    popup.classList.remove("popup_opened");
+    document.removeEventListener("keydown", closeByEscape);
+} 
 
-class Card {
+//close popup with esc key
+function closeByEscape (evt) {
+    if (evt.key === "Escape") {
+        const openedPopup = document.querySelector(".popup_opened");
+        closePopup(openedPopup);
+    }
+}
+
+
+export class Card {
     constructor(data, templateSelector) {
         this._data = data;
         this._name = data.name;
@@ -27,6 +47,8 @@ class Card {
         popupImage.src = this._link;
         popupImageTitle.textContent = this._name;
         popupImage.alt = this._name;
+
+        openPopup(imageWindow);
     }
 
     _setEventListeners() {
@@ -62,4 +84,3 @@ class Card {
     }
 }
 
-export default Card;

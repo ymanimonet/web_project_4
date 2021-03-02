@@ -1,5 +1,5 @@
 import FormValidator from "./FormValidator.js";
-import Card from "./Card.js";
+import {Card, openPopup, closePopup} from "./Card.js";
 
 
 const defaultConfig = {
@@ -77,17 +77,7 @@ const initialCards = [
   }
 ];
 
-//open any popup
-function openPopup(popup) {
-  popup.classList.add("popup_opened");
-  document.addEventListener("keydown", closeByEscape);
-}
 
-//close any popup
-function closePopup(popup) {
-  popup.classList.remove("popup_opened");
-  document.removeEventListener("keydown", closeByEscape);
-} 
 
 //close popup by clicking elsewhere
 profilePopup.addEventListener("click", function (evt) {
@@ -96,14 +86,6 @@ profilePopup.addEventListener("click", function (evt) {
     closePopup(profilePopup);
   }
 });
-
-//close popup with esc key
-function closeByEscape (evt) {
-  if (evt.key === "Escape") {
-      const openedPopup = document.querySelector(".popup_opened");
-      closePopup(openedPopup);
-  }
-}
 
 imageWindow.addEventListener("click", function (evt) {
   const clickElement = evt.target;
