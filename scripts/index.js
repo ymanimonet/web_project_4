@@ -78,7 +78,7 @@ const initialCards = [
 ];
 
 //open any popup
-const openPopup = (popup) => {
+function openPopup(popup) {
   popup.classList.add("popup_opened");
   document.addEventListener("keydown", closeByEscape);
 }
@@ -98,7 +98,7 @@ profilePopup.addEventListener("click", function (evt) {
 });
 
 //close popup with esc key
-const closeByEscape = (evt) => {
+function closeByEscape (evt) {
   if (evt.key === "Escape") {
       const openedPopup = document.querySelector(".popup_opened");
       closePopup(openedPopup);
@@ -108,7 +108,7 @@ const closeByEscape = (evt) => {
 imageWindow.addEventListener("click", function (evt) {
   const clickElement = evt.target;
   if (clickElement.classList.contains("popup")) {
-    closePopup(imageWindow);
+    openPopup(imageWindow);
   }
 });
 
@@ -189,10 +189,9 @@ initialCards.forEach(data => {
 function newCard(data) {
   generateCard(data);
   closePopup(addPopup);
-  console.log(data);
 }
 
 
+
+
 //export default openPopup;
-
-

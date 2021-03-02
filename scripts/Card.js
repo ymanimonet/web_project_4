@@ -1,15 +1,16 @@
+//import openPopup from "./index.js";
+
 const imageWindow = document.querySelector(".popup_type_image");
 const popupImage = imageWindow.querySelector(".popup__image");
 const popupImageTitle = imageWindow.querySelector(".popup__image-title");
 
 
 class Card {
-    constructor(data, templateSelector, handleCardClick) {
+    constructor(data, templateSelector) {
         this._data = data;
         this._name = data.name;
         this._link = data.link;
         this._templateSelector = templateSelector;
-        this._handleCardClick = handleCardClick;
 
     }
 
@@ -36,10 +37,8 @@ class Card {
         cardLikeButton.addEventListener("click", () => this._likeButton());
         cardDeleteButton.addEventListener("click", () => this._deleteButton());
         cardImage.addEventListener("click", () => this._cardPopup());
+        popupImage.addEventListener("click", () => openPopup());
 
-       cardImage.addEventListener('click', () => {
-            this._handleCardClick(this._name, this._link);
-        });
     }
 
     _getCardTemplate() {
