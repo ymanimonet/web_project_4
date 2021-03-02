@@ -4,11 +4,12 @@ const popupImageTitle = imageWindow.querySelector(".popup__image-title");
 
 
 class Card {
-    constructor(data, templateSelector) {
+    constructor(data, templateSelector, handleCardClick) {
         this._data = data;
         this._name = data.name;
         this._link = data.link;
         this._templateSelector = templateSelector;
+        this._handleCardClick = handleCardClick;
 
     }
 
@@ -25,8 +26,6 @@ class Card {
         popupImage.src = this._link;
         popupImageTitle.textContent = this._name;
         popupImage.alt = this._name;
-              
-        imageWindow.classList.add("popup_opened");
     }
 
     _setEventListeners() {
@@ -34,10 +33,11 @@ class Card {
         const cardDeleteButton = this._card.querySelector(".element__delete");
         const cardImage = this._card.querySelector(".element__photo");
         
-        //like button
         cardLikeButton.addEventListener("click", () => this._likeButton());
         cardDeleteButton.addEventListener("click", () => this._deleteButton());
         cardImage.addEventListener("click", () => this._cardPopup());
+
+        cardImage.addEventListener('click', () => this._handleCardClick(this._name, this._link));
     }
 
     _getCardTemplate() {

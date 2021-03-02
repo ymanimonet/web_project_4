@@ -13,6 +13,8 @@ const defaultConfig = {
 
 const list = document.querySelector(".elements__list");
 const imageWindow = document.querySelector(".popup_type_image");
+const popupImage = imageWindow.querySelector(".popup__image");
+const popupImageTitle = imageWindow.querySelector(".popup__image-title");
 
 //content
 const addPopup = document.querySelector(".popup_type_add");
@@ -78,15 +80,15 @@ const initialCards = [
 ];
 
 //open any popup
-const openPopup = (popup) => {
+function openPopup(popup) {
   popup.classList.add("popup_opened");
-  document.addEventListener("keydown", closeByEscape);
+  document.addEventListener("keydown", escPopup);
 }
 
 //close any popup
 function closePopup(popup) {
   popup.classList.remove("popup_opened");
-  document.removeEventListener("keydown", closeByEscape);
+  document.removeEventListener("keydown", escPopup);
 } 
 
 //close popup by clicking elsewhere
@@ -98,12 +100,14 @@ profilePopup.addEventListener("click", function (evt) {
 });
 
 //close popup with esc key
-const closeByEscape = (evt) => {
+function escPopup(evt) {
   if (evt.key === "Escape") {
-      const openedPopup = document.querySelector(".popup_opened");
-      closePopup(openedPopup);
+    const openedPopup = document.querySelector(".popup_opened");
+    closePopup(openedPopup);
   }
-}
+};
+
+
 
 imageWindow.addEventListener("click", function (evt) {
   const clickElement = evt.target;
@@ -169,6 +173,12 @@ function cardSubmit(evt) {
 
 addForm.addEventListener("submit", cardSubmit);
 
+function handleCardClick(name, link) {
+  popupImage.src = link
+  popupImageTitle.textContent = name
+  openPopup(imageWindow)
+}
+
 //closes the image
 closeImageWindow.addEventListener("click", () => {
   closePopup(imageWindow);
@@ -176,6 +186,7 @@ closeImageWindow.addEventListener("click", () => {
 
 function generateCard (data) {
   const cardElement = new Card(data, ".element-template");
+  handleCardClick();
   list.prepend(cardElement.createCard());
 }
 
