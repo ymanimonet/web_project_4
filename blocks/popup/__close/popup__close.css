@@ -4,7 +4,7 @@
     position: absolute;
     top: -40px;
     right: -40px;
-    background: transparent url("../../../images/close.svg") center;
+    background: transparent url("../../../src/images/close.svg") center;
     border: none;
 }
 

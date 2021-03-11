@@ -3,7 +3,7 @@
     height: 18px;
     align-self: flex-end;
     border: none;
-    background: transparent url("../../../images/heart.svg") no-repeat;
+    background: transparent url("../../../src/images/heart.svg") no-repeat;
 }
 
 .element__heart:hover {
