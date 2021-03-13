@@ -30,15 +30,13 @@ export default class Card {
     }
 
     _setEventListeners() {
-        //popupImage.addEventListener("click", () => openPopup());
-
-        this._element.querySelector(".element__heart")
+        this._card.querySelector(".element__heart")
           .addEventListener("click", () => this._likeButton());
 
-        this._element.querySelector(".element__delete")
+        this._card.querySelector(".element__delete")
           .addEventListener("click", () => this._deleteButton());
 
-        this._element.querySelector(".element__photo") 
+        this._card.querySelector(".element__photo") 
           .addEventListener("click", () => this._handleCardClick(this._link, this._name));
 
     }

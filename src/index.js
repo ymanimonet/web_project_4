@@ -1,11 +1,13 @@
+
 import "./styles/index.css";
+
 
 import FormValidator from "../components/FormValidator.js";
 import Card from "../components/Card.js";
 import Section from "../components/Section.js";
 import PopupWithForm from "../components/PopupWithForm.js";
-//import PopupWithImage from "../components/PopupWithImage.js";
 import UserInfo from "../components/UserInfo.js";
+import PopupWithImage from "../components/PopupWithImage.js";
 
 
 const defaultConfig = {
@@ -18,15 +20,15 @@ const defaultConfig = {
 };
 
 //const list = document.querySelector(".elements__list");
-//const imageWindow = document.querySelector(".popup_type_image");
+const imageWindow = document.querySelector(".popup_type_image");
 
 //content
-//const addPopup = document.querySelector(".popup_type_add");
+const addPopup = document.querySelector(".popup_type_add");
 const profilePopup = document.querySelector(".popup_type_edit");
 
 //forms
 const addForm = addPopup.querySelector(".form_type_add");
-const profileForm = profilePopup.querySelector(".form_type_edit");
+//const profileForm = profilePopup.querySelector(".form_type_edit");
 
 //profile
 const profile = document.querySelector(".profile");
@@ -62,32 +64,15 @@ const initialCards = [
     link: "https://code.s3.yandex.net/web-code/lago.jpg"
   }
 ];
-
+/*
 //validation
 const profileFormValidator = new FormValidator(defaultConfig, profileForm);
 const addFormValidator = new FormValidator(defaultConfig, addForm);
 
 profileFormValidator.enableValidation();
 addFormValidator.enableValidation();
+*/
 
-//edit popup 
-const editPopup = new PopupWithForm({
-  popupSelector: ".popup_type_edit",
-  //take info and update profile
-  handleFormSubmit,
-  formSelector: profileForm,
-  openButton: editButton});
-editPopup.setEventListener()
-
-//add popup --> new cards
-const addPopup = new PopupWithForm({
-  popupSelector: ".popup_type_add",
-  //take info and make card
-  handleFormSubmit,
-  formSelector: addForm,
-  openButton: addButton
-});
-addPopup.setEventListener()
 
 
 //initial cards
@@ -95,25 +80,60 @@ const list = new Section ({
   items: initialCards,
   renderer: (items) => {
     const card = new Card ({
-      items, 
-      handleClickCard: () => {
-        cardPopup();
+      data: items, 
+      handleCardClick: (link, name) => {
+        imagePopup.open(link, name);
       }
     }, ".element-template");
-    list.addItem(card);
+    list.addItem(card.createCard());
   }
 }, ".elements__list")
 
 list.renderItems(); 
 
-//new cards
 
 //photo popup
+const imagePopup = new PopupWithImage (imageWindow);
+imagePopup.setEventListeners();
 
+//add popup --> new cards
+const addCardPopup = new PopupWithForm({
+  popupSelector: addPopup,
+  //take info and make card
+  handleFormSubmit: (items) => {
+    const card = new Card ({
+      data: items, 
+      handleCardClick: (link, name) => {
+        imagePopup.open(link, name);
+      }
+    }, ".element-template");
+    list.prependItem(card.createCard());
+  },
+  formSelector: addForm,
+  openButton: addButton
+});
+addCardPopup.setEventListeners();
+
+/*
 //collect user info
 const userInfo = new UserInfo ({
   profileNameSelector: ".profile__title",
   profileDescriptionSelector: ".profile__subtitle"
 });
+
+//edit popup 
+const editPopup = new PopupWithForm({
+  popupSelector: profilePopup,
+  handleFormSubmit: ({name, description}) => {
+    userInfo.setUserInfo(name, description);
+  },
+  openButton: editButton
+});
+editPopup.setEventListeners();
+*/
+
+
+
+
 
 
