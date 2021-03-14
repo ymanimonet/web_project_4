@@ -1,6 +1,6 @@
 class Popup  {
     constructor (popupSelector) {
-        this._popupElement = popupSelector;
+        this._popupElement = document.querySelector(popupSelector);
         this._handleEscClose = this._handleEscClose.bind(this);
         this.close = this.close.bind(this);
     }
@@ -31,11 +31,3 @@ class Popup  {
 }
 
 export default Popup
-
-
-
-//const addCardPopup = new PopupWithForm(".popup_type_add");
-//addCardPopup.setEventListener()
-
-//const imagePopup = new PopupWithImage(".popup_type_image");
-//imagePopup.setEventListener()
