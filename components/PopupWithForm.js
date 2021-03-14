@@ -21,6 +21,14 @@ export default class PopupWithForm extends Popup {
         this._form.reset();
     }
 
+    open () {
+        super.open();
+        const titleField = this._popupElement.querySelector(".form__item_field_name");
+        const subtitleField = this._popupElement.querySelector(".form__item_field_description");
+        titleField.value = document.querySelector(".profile__title").textContent;
+        subtitleField.value = document.querySelector(".profile__subtitle").textContent;
+    }
+
     setEventListeners () {
         
         this._form.addEventListener("submit", (evt) => {

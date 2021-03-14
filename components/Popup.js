@@ -23,7 +23,7 @@ class Popup  {
 
     setEventListeners () {
         this._popupElement.addEventListener("click", (evt) => {
-            if (evt.target.classList.contains("popup__close") || (evt.target.classList.contains("popup__container"))) {
+            if (evt.target.classList.contains("popup__close") || (evt.target.classList.contains("popup"))) {
                 this.close();
             }
         }) 

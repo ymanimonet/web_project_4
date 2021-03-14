@@ -129,4 +129,5 @@ const editPopup = new PopupWithForm({
 editPopup.setEventListeners();
 editButton.addEventListener("click", (evt) => {
   editPopup.open();
+
 }) 
