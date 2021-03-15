@@ -124,12 +124,11 @@ const editPopup = new PopupWithForm({
   popupSelector: ".popup_type_edit",
   handleFormSubmit: ({name, description}) => {
     userInfo.setUserInfo(name, description);
-    console.log(name);
-    console.log(description);
   },
 });
 
 editPopup.setEventListeners();
 editButton.addEventListener("click", (evt) => {
   editPopup.open();
+  
 }) 

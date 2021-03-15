@@ -4,7 +4,6 @@
   <meta charset="UTF-8">
   <meta name="viewport" content="width=device-width, initial-scale=1.0">
   <title>Around the U.S.</title>
- <!--<link rel="stylesheet" href="pages/index.css">-->
 </head>
 
 <body class="root">
@@ -40,10 +39,10 @@
             <h2 class="form__title">Edit profile</h2>
             <fieldset class="form__text">
 
-                <input id="profile-name" class="form__item form__item_field_name" type="text" name="name" placeholder="Name" minlength="2" maxlength="40" required>
+                <input id="profile-name" class="form__item form__item_field_name" type="text" name="name" value="Jacques Cousteau" placeholder="Name" minlength="2" maxlength="40" required>
                 <span id="profile-name-error" class="form__error"></span>
 
-                <input id="profile-text" class="form__item form__item_field_description" type="text" name="description" placeholder="About me" minlength="2" maxlength="40" required>
+                <input id="profile-text" class="form__item form__item_field_description" type="text" name="description" value="Explorer" placeholder="About me" minlength="2" maxlength="40" required>
                 <span id="profile-text-error" class="form__error"></span>
 
             </fieldset>
@@ -60,10 +59,10 @@
             <h2 class="form__title">New Place</h2>
             <fieldset class="form__text">
 
-                <input id="card-title" class="form__item form__item_field_title" type="text" name="title" placeholder="Title" minlength="1" maxlength="30" required>
+                <input id="card-title" class="form__item form__item_field_title" type="text" name="name"  placeholder="Title" minlength="1" maxlength="30" required>
                 <span id="card-title-error" class="form__error"></span>
 
-                <input id="card-url" class="form__item form__item_field_image-url" type="url" name="image-url" placeholder="Image Link" required>
+                <input id="card-url" class="form__item form__item_field_image-url" type="url" name="link" placeholder="Image Link" required>
                 <span id="card-url-error" class="form__error"></span>
 
             </fieldset>
@@ -84,7 +83,6 @@
         </div>
 
     
-
         <!--creating a new element-->
         <template class="element-template" id="element">
           <li class="element"> 
@@ -96,14 +94,5 @@
             </div>
           </li>
         </template>
-
-    <!--<script type="module" src="scripts/components/FormValidator.js"></script>
-    <script type="module" src="scripts/components/Card.js"></script>
-    <script type="module" src="scripts/components/Popup.js"></script>
-    <script type="module" src="scripts/components/PopupWithForm.js"></script>
-    <script type="module" src="scripts/components/PopupWithImage.js"></script>
-    <script type="module" src="scripts/components/Section.js"></script>
-    <script type="module" src="scripts/components/UserInfo.js"></script>
-    <script type="module" src="scripts/index.js"></script>-->
   </body>
 </html>
