@@ -13,20 +13,13 @@ export default class PopupWithForm extends Popup {
         this._inputList.forEach(input => {
             this._formValues[input.name] = input.value;
         });
+        
         return this._formValues;
     }
 
     close () {
         super.close();
         this._form.reset();
-    }
-
-    open () {
-        super.open();
-        const titleField = this._popupElement.querySelector(".form__item_field_name");
-        const subtitleField = this._popupElement.querySelector(".form__item_field_description");
-        titleField.value = document.querySelector(".profile__title").textContent;
-        subtitleField.value = document.querySelector(".profile__subtitle").textContent;
     }
 
     setEventListeners () {

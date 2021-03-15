@@ -99,15 +99,15 @@ const addCardPopup = new PopupWithForm({
   handleFormSubmit: (items) => {
     const card = new Card ({
       data: items, 
-      handleCardClick: ({link, title}) => {
-        imagePopup.open(link, title);
+      handleCardClick: (link, name) => {
+        imagePopup.open(link, name);
       }
     }, ".element-template");
-    list.prependItem(card.createCard());
+    list.prependItem(card.createCard(items));
     console.log(items);
-
   }
 });
+
 addCardPopup.setEventListeners(); 
 addButton.addEventListener("click", (evt) => {
   addCardPopup.open();
@@ -124,10 +124,12 @@ const editPopup = new PopupWithForm({
   popupSelector: ".popup_type_edit",
   handleFormSubmit: ({name, description}) => {
     userInfo.setUserInfo(name, description);
+    console.log(name);
+    console.log(description);
   },
 });
+
 editPopup.setEventListeners();
 editButton.addEventListener("click", (evt) => {
   editPopup.open();
-
 }) 
