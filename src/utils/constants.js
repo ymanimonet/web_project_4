@@ -14,6 +14,10 @@ export const profilePopup = document.querySelector(".popup_type_edit");
 //forms
 export const addForm = addPopup.querySelector(".form_type_add");
 export const profileForm = profilePopup.querySelector(".form_type_edit");
+
+//profile form fields
+export const nameField = profileForm.querySelector(".form__item_field_name")
+export const descriptionField = profileForm.querySelector(".form__item_field_description")
   
 //profile
 export const profile = document.querySelector(".profile");

@@ -7,7 +7,7 @@ export default class UserInfo {
     }
 
     getUserInfo () {
-        return [this._name.innerText, this._description.innerText];
+        return {name: this._name.innerText, description: this._description.innerText};
         
     }
 

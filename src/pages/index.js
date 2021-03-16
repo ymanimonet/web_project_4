@@ -10,6 +10,8 @@ import {
   defaultConfig,
   addForm,
   profileForm,
+  nameField,
+  descriptionField,
   editButton,
   addButton,
   initialCards
@@ -59,7 +61,7 @@ const addCardPopup = new PopupWithForm({
 addCardPopup.setEventListeners(); 
 addButton.addEventListener("click", (evt) => {
   addCardPopup.open();
-  addForm.querySelector(".form__button").classList.add("form__button_disabled");
+  addFormValidator.resetValidation();
 })
 
 //collect user info
@@ -80,6 +82,6 @@ editPopup.setEventListeners();
 editButton.addEventListener("click", (evt) => {
   editPopup.open();
   const fillFields = userInfo.getUserInfo();
-  profileForm.querySelector(".form__item_field_name").value = fillFields[0];
-  profileForm.querySelector(".form__item_field_description").value = fillFields[1];
+  nameField.value = fillFields.name;
+  descriptionField.value = fillFields.description;
 }) 
