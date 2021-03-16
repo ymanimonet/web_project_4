@@ -1,9 +1,3 @@
-//import PopupWithImage from "./PopupWithImage";
-
-const imageWindow = document.querySelector(".popup_type_image");
-const popupImage = imageWindow.querySelector(".popup__image");
-const popupImageTitle = imageWindow.querySelector(".popup__image-title");
-
 export default class Card {
     constructor({data, handleCardClick}, templateSelector) {
         this._name = data.name;
@@ -19,14 +13,6 @@ export default class Card {
 
     _deleteButton() {
         this._card.remove();
-    }
-
-    _cardPopup() {
-        popupImage.src = this._link;
-        popupImageTitle.textContent = this._name;
-        popupImage.alt = this._name;
-
-        openPopup(imageWindow);
     }
 
     _setEventListeners() {

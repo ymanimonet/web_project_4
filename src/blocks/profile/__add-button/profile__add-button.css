@@ -7,7 +7,7 @@
     border: 2px solid #FFFFFF;
     box-sizing: border-box;
     border-radius: 2px;
-    background: transparent url(../../../src/images/add.svg) center no-repeat;
+    background: transparent url(../../../images/add.svg) center no-repeat;
 } 
 
 .profile__add-button:hover {

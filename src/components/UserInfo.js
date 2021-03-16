@@ -8,6 +8,7 @@ export default class UserInfo {
 
     getUserInfo () {
         return [this._name.innerText, this._description.innerText];
+        
     }
 
     setUserInfo (name, description) {
