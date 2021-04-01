@@ -6,6 +6,15 @@
     margin-right: 30px;
     border-radius: 50%;
     overflow: hidden;
+    transition: opacity 0.5s linear 0s;
+}
+
+.profile__pic:hover + .profile__pic-edit { 
+    opacity: 1;
+}
+
+.profile__pic:hover {
+    opacity: 0.5;
 }
 
 @media screen and (max-width: 525px) {

@@ -3,16 +3,16 @@ export default class UserInfo {
         this._profileName = profileNameSelector;
         this._profileDescription = profileDescriptionSelector;
         this._name = document.querySelector(this._profileName);
-        this._description = document.querySelector(this._profileDescription);
+        this._about = document.querySelector(this._profileDescription);
     }
 
     getUserInfo () {
-        return {name: this._name.innerText, description: this._description.innerText};
+        return {name: this._name.innerText, about: this._about.innerText};
         
     }
 
-    setUserInfo (name, description) {
+    setUserInfo (name, about) {
         this._name.innerText = name;
-        this._description.innerText = description;
+        this._about.innerText = about;
     }
 }
