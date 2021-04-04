@@ -22,8 +22,8 @@ export default class Card {
         cardLikes.textContent = this._likes.length
     }
 
-    _ownerLike() {
-        const owner = this._likes.find(like => like._id === this._owner);
+    _ownerLike(userId) {
+        const owner = this._likes.find(like => like._id === userId);
         return owner;
     }
 
@@ -35,15 +35,15 @@ export default class Card {
         this._card.remove();
     }
 
-    _setEventListeners() {
+    _setEventListeners(userId) {
         const deleteButton = this._card.querySelector(".element__delete");
         /*deleteButton.addEventListener('click', () => {
             this._handleDeleteClick();
         }) */
 
-       if (this._owner === this._ownerId) {
+       if (userId === this._ownerId) {
             deleteButton.addEventListener('click', () => {
-                this._handleDeleteClick(this.id());
+                this._handleDeleteClick(this.id);
             })
         } else {
             deleteButton.classList.add("element__hidden");
@@ -53,12 +53,12 @@ export default class Card {
         cardLikeButton.addEventListener("click", () => {
             this._likeButton();
 
-            if (this._ownerLike(this._owner)) {
+            if (this._ownerLike(userId)) {
                 this._api.removeLike(this._id);
-                this._likes = this._likes.filter(like => like._id !== this._owner);
+                this._likes = this._likes.filter(like => like._id !== userId);
             } else {
                 this._api.addLike(this._id);
-                this._likes.push({ _id: this._owner });
+                this._likes.push({ _id: userId });
             };
 
             this._countLikes();
@@ -74,7 +74,7 @@ export default class Card {
         return cardTemplate;
     }
 
-    createCard() {
+    createCard(userId) {
         this._card = this._getCardTemplate().cloneNode(true);
       
         const cardImage = this._card.querySelector(".element__photo");
@@ -84,7 +84,10 @@ export default class Card {
         cardImage.src = this._link;
         cardImage.alt = this._name;
 
-        this._setEventListeners();
+        if (this._ownerLike(userId)) {
+            this._likeButton();
+        }
+        this._setEventListeners(userId);
         this._countLikes();
       
         return this._card;   

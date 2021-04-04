@@ -33,7 +33,7 @@ const api = new Api({
 
 //1.loading user information from the server
 api.gatherUserInfo().then((result) => {
-    userInfo.setUserInfo(result.name, result.about);
+    userInfo.setUserInfo(result.name, result.about, result.avatar, result._id);
 });
 
 //2. loading cards from the server
@@ -58,7 +58,7 @@ api.getInitialCards()
       }
     }, ".elements__list", api);
     list.renderItems();
-  })
+  }) 
 
   function newCard(items) {
     const card = new Card ({
@@ -79,7 +79,7 @@ api.getInitialCards()
         })
       }
     }, ".element-template", api);
-    return card.createCard()
+    return card.createCard(userInfo.id)
   }
 
   //add popup --> new cards
@@ -107,7 +107,7 @@ const addCardPopup = new PopupWithForm({
           });
         }
       }, ".elements__list");
-      list.prependItem(items);
+      list.prependItem(card.createCard(userInfo.id));
     })
     .catch((err) => console.log(err));
   }
@@ -142,7 +142,8 @@ addButton.addEventListener("click", (evt) => {
 //collect user info
 const userInfo = new UserInfo ({
   profileNameSelector: ".profile__title",
-  profileDescriptionSelector: ".profile__subtitle"
+  profileDescriptionSelector: ".profile__subtitle",
+  avatar: ".profile__pic"
 });
 
 //edit popup 
@@ -151,7 +152,7 @@ const editPopup = new PopupWithForm({
   handleFormSubmit: ({name, about}) => {
     return api.updateUserInfo({name, about})
       .then(result => {
-        userInfo.setUserInfo(result.name, result.about)
+        userInfo.setUserInfo(result.name, result.about, result.avatar)
       })
       .catch((err) => console.log(err));
   },
