@@ -33,13 +33,11 @@ export default class Card {
 
     deleteCard() {
         this._card.remove();
+        this._card = null;
     }
 
     _setEventListeners(userId) {
         const deleteButton = this._card.querySelector(".element__delete");
-        /*deleteButton.addEventListener('click', () => {
-            this._handleDeleteClick();
-        }) */
 
        if (userId === this._ownerId) {
             deleteButton.addEventListener('click', () => {

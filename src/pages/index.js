@@ -18,7 +18,6 @@ import {
   editButton,
   addButton,
   avatarButton,
-  deleteConfirmButton,
   avatar
   //initialCards
 } from "../utils/constants.js"
@@ -31,58 +30,94 @@ const api = new Api({
   }
 });
 
-//1.loading user information from the server
-api.gatherUserInfo().then((result) => {
-    userInfo.setUserInfo(result.name, result.about, result.avatar, result._id);
+//collect user info
+const userInfo = new UserInfo ({
+  profileNameSelector: ".profile__title",
+  profileDescriptionSelector: ".profile__subtitle",
+  avatar: ".profile__pic"
 });
 
-//2. loading cards from the server
-api.getInitialCards()
-  .then((result) => {
-    const list = new Section ({
-      items: result,
-      renderer: (items) => {
-        list.addItem(newCard(items));
-        //console.log(items);
-      },
-      handleDeleteClick: () => {
-        deletePopup.open();
-        deletePopup.handleConfirmClick(() => {
-          api.removeCard(card.getId)
-            .then(() => {
-              //console.log(card);
-              card.deleteCard();
-            })
-            .catch((err) => console.log(err));
-        })
-      }
-    }, ".elements__list", api);
-    list.renderItems();
-  }) 
+//1.loading user information from the server
+api.gatherUserInfo().then((result) => {
+  userInfo.setUserInfo(result.name, result.about, result.avatar, result._id);
+})
+.catch((err) => console.log(err));
 
-  function newCard(items) {
-    const card = new Card ({
-      data: items,
-      handleCardClick: (link, name) => {
-        imagePopup.open(link, name);
+//new card
+function newCard(items) {
+  const card = new Card ({
+    data: items,
+    handleCardClick: (link, name) => {
+      imagePopup.open(link, name);
+    },
+    handleDeleteClick: () => {
+      deletePopup.open();
+      deletePopup.handleConfirmClick(() => {
+        api.removeCard(card.getId())
+          .then(() => {
+            //console.log(card);
+            card.deleteCard();
+            deletePopup.close();
+          })
+          .catch((err) => console.log(err));
+      })
+    }
+  }, ".element-template");
+  return card.createCard(userInfo.id)
+} 
+
+/*
+const list = new Section({
+  items,
+  renderer: (data) => {
+    const card = new Card({
+      data,
+      handleCardClick: () => {
+        imagePopup.open(data);
       },
       handleDeleteClick: () => {
         deletePopup.open();
         deletePopup.handleConfirmClick(() => {
           api.removeCard(card.getId())
             .then(() => {
-              //console.log(card);
               card.deleteCard();
               deletePopup.close();
             })
             .catch((err) => console.log(err));
         })
       }
-    }, ".element-template", api);
-    return card.createCard(userInfo.id)
+    }, ".element.template");
   }
+}, ".elements__list");
 
-  //add popup --> new cards
+api.getInitialCards().then((items) => {
+  console.log(items);
+  console.log(list);
+  //list.addItem(newCard(data));
+  list.renderItems(items);
+  console.log(data);
+})
+.catch((err) => console.log(err));
+*/
+
+
+//2. loading cards from the server
+
+api.getInitialCards().then((result) => {
+  const list = new Section ({
+    items: result,
+    renderer: (items) => {
+      list.addItem(newCard(items));
+      //console.log(items);
+      //console.log(list);
+    },
+  }, ".elements__list");
+  list.renderItems();
+})
+.catch((err) => console.log(err));
+
+
+//add popup --> new cards
 const addCardPopup = new PopupWithForm({
   popupSelector: ".popup_type_add",
   //take info and make card
@@ -94,24 +129,24 @@ const addCardPopup = new PopupWithForm({
         items: result,
         renderer: (items) => {
           list.addItem(newCard(items));
-          console.log(items);
         },
-        handleDeleteClick: () => {
-          deletePopup.open();
-          deleteConfirmButton.addEventListener("click", (evt) => {
-            deletePopup.close();
-            api.removeCard(card.getId)
-              .then(() => {
-                card.deleteCard();
-              })
-          });
-        }
+        
       }, ".elements__list");
-      list.prependItem(card.createCard(userInfo.id));
+      //list.prependItem(card.createCard(userInfo.id));
+      //console.log(result);
+      list.prependItem(result);
+      //console.log(result);
+      addCardPopup.close();
     })
     .catch((err) => console.log(err));
   }
 });
+
+addCardPopup.setEventListeners(); 
+addButton.addEventListener("click", (evt) => {
+  addCardPopup.open();
+  addFormValidator.resetValidation();
+})
 
 //validation
 const profileFormValidator = new FormValidator(defaultConfig, profileForm);
@@ -122,29 +157,14 @@ profileFormValidator.enableValidation();
 addFormValidator.enableValidation();
 avatarFormValidator.enableValidation();
 
+//delete popup
 const deletePopup = new PopupToDelete(".popup_type_delete");
-
 deletePopup.setEventListeners();
 
 
 //photo popup
 const imagePopup = new PopupWithImage (".popup_type_image");
 imagePopup.setEventListeners();
-
-
-
-addCardPopup.setEventListeners(); 
-addButton.addEventListener("click", (evt) => {
-  addCardPopup.open();
-  addFormValidator.resetValidation();
-})
-
-//collect user info
-const userInfo = new UserInfo ({
-  profileNameSelector: ".profile__title",
-  profileDescriptionSelector: ".profile__subtitle",
-  avatar: ".profile__pic"
-});
 
 //edit popup 
 const editPopup = new PopupWithForm({
@@ -153,6 +173,7 @@ const editPopup = new PopupWithForm({
     return api.updateUserInfo({name, about})
       .then(result => {
         userInfo.setUserInfo(result.name, result.about, result.avatar)
+        editPopup.close();
       })
       .catch((err) => console.log(err));
   },
@@ -171,10 +192,10 @@ editButton.addEventListener("click", (evt) => {
 const avatarPopup = new PopupWithForm({
   popupSelector: ".popup_type_avatar",
   handleFormSubmit: ({link}) => {
-    console.log(link);
     return api.updateAvatar({avatar: link})
       .then(result => {
         avatar.src = result.avatar;
+        avatarPopup.close();
       })
       .catch((err) => console.log(err));
   }

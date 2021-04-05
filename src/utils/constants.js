@@ -30,7 +30,6 @@ export const avatar = profile.querySelector(".profile__pic");
 export const editButton = profile.querySelector(".profile__edit");
 export const addButton = profile.querySelector(".profile__add-button");
 export const avatarButton = profile.querySelector(".profile__pic-edit");
-export const deleteConfirmButton = deletePopup.querySelector(".form__button");
   
 
 /*
