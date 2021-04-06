@@ -20,11 +20,3 @@ class PopupToDelete extends Popup {
 
 
 export default PopupToDelete;
-
-/*deleteConfirmButton.addEventListener("click", (evt) => {
-    deletePopup.close();
-    api.removeCard(card.getId)
-      .then(() => {
-        card.deleteCard();
-      })
-  }); */

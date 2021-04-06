@@ -19,7 +19,6 @@ import {
   addButton,
   avatarButton,
   avatar
-  //initialCards
 } from "../utils/constants.js"
 
 const api = new Api({
@@ -62,91 +61,41 @@ function newCard(items) {
           .catch((err) => console.log(err));
       })
     }
-  }, ".element-template");
+  }, ".element-template", api);
   return card.createCard(userInfo.id)
 } 
 
-/*
-const list = new Section({
-  items,
-  renderer: (data) => {
-    const card = new Card({
-      data,
-      handleCardClick: () => {
-        imagePopup.open(data);
-      },
-      handleDeleteClick: () => {
-        deletePopup.open();
-        deletePopup.handleConfirmClick(() => {
-          api.removeCard(card.getId())
-            .then(() => {
-              card.deleteCard();
-              deletePopup.close();
-            })
-            .catch((err) => console.log(err));
-        })
-      }
-    }, ".element.template");
-  }
-}, ".elements__list");
 
 api.getInitialCards().then((items) => {
-  console.log(items);
-  console.log(list);
-  //list.addItem(newCard(data));
-  list.renderItems(items);
-  console.log(data);
-})
-.catch((err) => console.log(err));
-*/
-
-
-//2. loading cards from the server
-
-api.getInitialCards().then((result) => {
-  const list = new Section ({
-    items: result,
+  const list = new Section({
+    items,
     renderer: (items) => {
       list.addItem(newCard(items));
-      //console.log(items);
-      //console.log(list);
-    },
+    }
   }, ".elements__list");
   list.renderItems();
+
+  const addCardPopup = new PopupWithForm({
+    popupSelector: ".popup_type_add",
+    //take info and make card
+    handleFormSubmit: (items) => {
+      return api.addCard(items)
+      .then((items) => {
+        list.prependItem(newCard(items));
+        addCardPopup.close();
+      })
+      .catch((err) => console.log(err));
+    }
+  });
+
+  addCardPopup.setEventListeners(); 
+  addButton.addEventListener("click", (evt) => {
+    addCardPopup.open();
+    addFormValidator.resetValidation();
+  })
 })
 .catch((err) => console.log(err));
 
-
-//add popup --> new cards
-const addCardPopup = new PopupWithForm({
-  popupSelector: ".popup_type_add",
-  //take info and make card
-  handleFormSubmit: (items) => {
-    return api.addCard(items)
-    .then((result) => {
-      //list.prependItem(newCard());
-      const list = new Section ({
-        items: result,
-        renderer: (items) => {
-          list.addItem(newCard(items));
-        },
-        
-      }, ".elements__list");
-      //list.prependItem(card.createCard(userInfo.id));
-      //console.log(result);
-      list.prependItem(result);
-      //console.log(result);
-      addCardPopup.close();
-    })
-    .catch((err) => console.log(err));
-  }
-});
-
-addCardPopup.setEventListeners(); 
-addButton.addEventListener("click", (evt) => {
-  addCardPopup.open();
-  addFormValidator.resetValidation();
-})
 
 //validation
 const profileFormValidator = new FormValidator(defaultConfig, profileForm);
@@ -180,7 +129,7 @@ const editPopup = new PopupWithForm({
 });
 
 editPopup.setEventListeners();
-editButton.addEventListener("click", (evt) => {
+editButton.addEventListener("click", () => {
   editPopup.open();
   const fillFields = userInfo.getUserInfo();
   nameField.value = fillFields.name;
