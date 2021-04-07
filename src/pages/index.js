@@ -37,10 +37,11 @@ const userInfo = new UserInfo ({
 });
 
 //1.loading user information from the server
+/*
 api.gatherUserInfo().then((result) => {
   userInfo.setUserInfo(result.name, result.about, result.avatar, result._id);
 })
-.catch((err) => console.log(err));
+.catch((err) => console.log(err)); */
 
 //new card
 function newCard(items) {
@@ -65,18 +66,27 @@ function newCard(items) {
   return card.createCard(userInfo.id)
 } 
 
-
-api.getInitialCards().then((items) => {
-  const list = new Section({
-    items,
-    renderer: (items) => {
-      list.addItem(newCard(items));
-    }
-  }, ".elements__list");
-  list.renderItems();
-
-  Promise.all([api.gatherUserInfo(), api.getInitialCards()])
+Promise.all([
+  //loading user information from the server
+  api.gatherUserInfo()
+    .then((result) => {
+      userInfo.setUserInfo(result.name, result.about, result.avatar, result._id);
+    })
+    .catch((err) => console.log(err)), 
+  //loading cards from the server
+  api.getInitialCards()
+    .then((items) => {
+      const list = new Section({
+        items,
+        renderer: (items) => {
+          list.addItem(newCard(items));
+        }
+      }, ".elements__list");
+      list.renderItems();})
+    .catch((err) => console.log(err))
+])
   .then(() => {
+    //adding new cards via form
     const addCardPopup = new PopupWithForm({
       popupSelector: ".popup_type_add",
       //take info and make card
@@ -97,8 +107,6 @@ api.getInitialCards().then((items) => {
     })
   })
   .catch((err) => console.log(err));
-})
-.catch((err) => console.log(err));
 
 
 
