@@ -75,26 +75,31 @@ api.getInitialCards().then((items) => {
   }, ".elements__list");
   list.renderItems();
 
-  const addCardPopup = new PopupWithForm({
-    popupSelector: ".popup_type_add",
-    //take info and make card
-    handleFormSubmit: (items) => {
-      return api.addCard(items)
-      .then((items) => {
-        list.prependItem(newCard(items));
-        addCardPopup.close();
-      })
-      .catch((err) => console.log(err));
-    }
-  });
-
-  addCardPopup.setEventListeners(); 
-  addButton.addEventListener("click", (evt) => {
-    addCardPopup.open();
-    addFormValidator.resetValidation();
+  Promise.all([api.gatherUserInfo(), api.getInitialCards()])
+  .then(() => {
+    const addCardPopup = new PopupWithForm({
+      popupSelector: ".popup_type_add",
+      //take info and make card
+      handleFormSubmit: (items) => {
+        return api.addCard(items)
+        .then((items) => {
+          list.prependItem(newCard(items));
+          addCardPopup.close();
+        })
+        .catch((err) => console.log(err));
+      }
+    });
+  
+    addCardPopup.setEventListeners(); 
+    addButton.addEventListener("click", (evt) => {
+      addCardPopup.open();
+      addFormValidator.resetValidation();
+    })
   })
+  .catch((err) => console.log(err));
 })
 .catch((err) => console.log(err));
+
 
 
 //validation
