@@ -29,19 +29,13 @@ const api = new Api({
   }
 });
 
+
 //collect user info
 const userInfo = new UserInfo ({
   profileNameSelector: ".profile__title",
   profileDescriptionSelector: ".profile__subtitle",
   avatar: ".profile__pic"
 });
-
-//1.loading user information from the server
-/*
-api.gatherUserInfo().then((result) => {
-  userInfo.setUserInfo(result.name, result.about, result.avatar, result._id);
-})
-.catch((err) => console.log(err)); */
 
 //new card
 function newCard(items) {
@@ -66,49 +60,44 @@ function newCard(items) {
   return card.createCard(userInfo.id)
 } 
 
-Promise.all([
-  //loading user information from the server
-  api.gatherUserInfo()
-    .then((result) => {
-      userInfo.setUserInfo(result.name, result.about, result.avatar, result._id);
-    })
-    .catch((err) => console.log(err)), 
-  //loading cards from the server
-  api.getInitialCards()
-    .then((items) => {
-      const list = new Section({
-        items,
-        renderer: (items) => {
-          list.addItem(newCard(items));
-        }
-      }, ".elements__list");
-      list.renderItems();})
-    .catch((err) => console.log(err))
-])
-  .then(() => {
-    //adding new cards via form
-    const addCardPopup = new PopupWithForm({
-      popupSelector: ".popup_type_add",
-      //take info and make card
-      handleFormSubmit: (items) => {
-        return api.addCard(items)
-        .then((items) => {
-          list.prependItem(newCard(items));
-          addCardPopup.close();
-        })
-        .catch((err) => console.log(err));
-      }
-    });
-  
-    addCardPopup.setEventListeners(); 
-    addButton.addEventListener("click", (evt) => {
-      addCardPopup.open();
-      addFormValidator.resetValidation();
-    })
-  })
-  .catch((err) => console.log(err));
+api.gatherUserInfo().then((result) => { 
+  userInfo.setUserInfo(result.name, result.about, result.avatar, result._id); 
+}) 
+.catch((err) => console.log(err)); 
 
+api.getInitialCards().then((items) => { 
+  const list = new Section({ 
+    items, 
+    renderer: (items) => { 
+      list.addItem(newCard(items)); 
+    } 
+  }, ".elements__list"); 
+  list.renderItems();
 
+Promise.all([api.gatherUserInfo(), api.getInitialCards()]) 
+
+  .then(() => { 
+    const addCardPopup = new PopupWithForm({ 
+      popupSelector: ".popup_type_add", 
+      //take info and make card 
+      handleFormSubmit: (items) => { 
+        return api.addCard(items) 
+        .then((items) => { 
+          list.prependItem(newCard(items)); 
+          addCardPopup.close(); 
+        }) 
+        .catch((err) => console.log(err)); 
+      } 
+    }); 
+   
+    addCardPopup.setEventListeners();  
+    addButton.addEventListener("click", (evt) => { 
+      addCardPopup.open(); 
+      addFormValidator.resetValidation(); 
+    }) 
+  }) 
+  .catch((err) => console.log(err)); 
+}) 
 
 //validation
 const profileFormValidator = new FormValidator(defaultConfig, profileForm);
@@ -167,4 +156,4 @@ avatarPopup.setEventListeners();
 avatarButton.addEventListener("click", (evt) => {
   avatarPopup.open();
   avatarFormValidator.resetValidation();
-})
+});
