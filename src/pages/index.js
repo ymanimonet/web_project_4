@@ -60,26 +60,27 @@ function newCard(items) {
   return card.createCard(userInfo.id)
 } 
 
-api.gatherUserInfo().then((result) => { 
-  userInfo.setUserInfo(result.name, result.about, result.avatar, result._id); 
-}) 
-.catch((err) => console.log(err)); 
+Promise.all([
+  api.gatherUserInfo(),
+  api.getInitialCards()
+]) 
+  .then(([result, items]) => { 
+    
+    //sets user information
+    userInfo.setUserInfo(result.name, result.about, result.avatar, result._id); 
 
-api.getInitialCards().then((items) => { 
-  const list = new Section({ 
-    items, 
-    renderer: (items) => { 
-      list.addItem(newCard(items)); 
-    } 
-  }, ".elements__list"); 
-  list.renderItems();
+    //renders cards from server
+    const list = new Section({ 
+      items, 
+      renderer: (items) => { 
+        list.addItem(newCard(items)); 
+      } 
+    }, ".elements__list"); 
+    list.renderItems();
 
-Promise.all([api.gatherUserInfo(), api.getInitialCards()]) 
-
-  .then(() => { 
+    //adding new cards via form
     const addCardPopup = new PopupWithForm({ 
       popupSelector: ".popup_type_add", 
-      //take info and make card 
       handleFormSubmit: (items) => { 
         return api.addCard(items) 
         .then((items) => { 
@@ -97,9 +98,9 @@ Promise.all([api.gatherUserInfo(), api.getInitialCards()])
     }) 
   }) 
   .catch((err) => console.log(err)); 
-}) 
 
-//validation
+
+//form validation
 const profileFormValidator = new FormValidator(defaultConfig, profileForm);
 const addFormValidator = new FormValidator(defaultConfig, addForm);
 const avatarFormValidator = new FormValidator(defaultConfig, avatarForm);
